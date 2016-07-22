@@ -1,0 +1,53 @@
+if ~exist( 'apt_bpp', 'var' )
+  e0 = load( 'exposure_free.txt' );
+  e1 = load( 'exposure_closed.txt' );
+  apt_bpp = load( 'aptamer_bpp.txt' );
+  sequences = textread( 'sequences.txt', '%s' );
+  fprintf( 'Done reading files\n' );
+end
+
+%exposure graph
+figure(1)
+set(gcf, 'PaperPositionMode','auto','color','white');
+if length( e0 ) < 500
+  N = size( e0, 1 ); e = [];
+  for i = 1:N
+    e = [e; e0(i,:) ];
+    e = [e; e1(i,:) ];
+  end
+  clf;
+  image( e*128 )
+  colormap( 1 - gray(100) );
+end
+
+% mean exposure
+figure(2)
+clf;
+subplot(2,1,1);
+set(gcf, 'PaperPositionMode','auto','color','white');
+plot( mean( e0 ),'k' ); hold on
+plot( mean( e1 ),'r' );hold off
+xlabel( 'Sequence position' );
+ylabel( 'Base pair exposure' );
+legend( 'no aptamer', 'aptamer' );
+
+subplot(2,1,2);
+M = size( apt_bpp, 1 );
+plot( [1:M]/M, sort( apt_bpp(:,1) ),'k' ); hold on
+plot( [1:M]/M, sort( apt_bpp(:,2) ),'r' ); hold on
+cutoff = 0.5;
+plot( [0 1], cutoff*[1 1],'color',[0.5 0.5 0.5] );
+hold off
+fprintf( 'Frac. with >%5.2f correct sec. struct: %f\n',cutoff,...
+	 sum( apt_bpp(:,1)>cutoff)/length( apt_bpp(:,1) ) );
+set( gca,'yscale','log' );
+legend( 'no ligand', 'mimic ligand' );
+xlabel( 'Fraction of constructs' );
+ylabel( 'Probability of aptamer' );
+
+
+figure(3)
+%e0_trip = plot_by_triplet( e0, sequences );
+%e0_trip = plot_by_triplet( e0, sequences );
+logratio = log(e1./e0);
+logratio_trip = plot_by_triplet( logratio, sequences );

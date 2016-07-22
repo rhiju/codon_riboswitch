@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf390
+{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fswiss\fcharset0 Helvetica;\f2\fmodern\fcharset0 Courier-Oblique;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww17780\viewh16580\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f0\fs24 \cf0 Simulations of  trp aptamer sequence, flanked by 100-nt random sequence on both ends:\
+\
+aptamer_sequence = 'CGAGGACCGGUACGGCCGCCACUCG'\
+secstruct_mut    = '((((...(((.....)))...))))'\
+nt_mut           = '..........NNN.N..........'\
+\
+[secstruct  mutated to WC, incl. GU and nt_mut changed to anything]\
+To mimic ligand binding, apical hairpin is forced to form.\
+\
+Base pair exposures:\
+\
+
+\f1 {{\NeXTGraphic alternative_bpp_profiles.png \width9460 \height12100
+}¬}
+\f0 \
+\
+Averaged over 2500 sequences:\
+\
+
+\f1 {{\NeXTGraphic bpp_distributions.pdf \width6860 \height10040
+}¬}
+\f0 \
+\
+The bottom panel is cumulative distribution of bpp for aptamer closing:\
+
+\f2\i Frac. with > 0.80 correct sec. struct: 0.027200
+\f0\i0 \
+\
+So about 3% of the time the correct structure is 'dominant'. That's still pretty significant actually. About 50% of the time bpp > 10^-4.\
+\
+\
+What triplets are most likely to be 'released'? Was expecting GUC and UGG [last is anticodon] -- reverse complementary to trp internal loop. Plot average log-ratio:\
+\
+
+\f1 {{\NeXTGraphic logratio_across_triplets.png \width14960 \height11480
+}¬}
+\f0 \
+\
+\
+\
+Reasonable enrichment of GUC 5' of aptamer, but not whopping. UGG enrichment is nothing to write home about. What?\
+\
+Also looked for triplets that are low (<0.01 exposure) going to exposed (>0.5) upon mimicking binding.\
+\
+
+\f1 {{\NeXTGraphic frac_from_0.01_to_0.5_across_triplets.png \width14960 \height11480
+}¬}
+\f0 \
+\
+\
+\
+\
+\
+If we disallow GU as W/C pairs,\
+\
+Frac. with > 0.80 correct sec. struct: 0.117241\
+but no real resolution of triplets in log-ratio:\
+\
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 3.20.28 PM.png \width15441 \height11860
+}¬}
+\f0 \
+\
+Hmm\'85 this may be reflecting that external triplets with G's and C's are most likely to mispair inside aptamer (and then become free).\
+\
+Few more tests\'85 try short lengths (20 external instead of 100) -- may 'concentrate' signal. Yes, indeed:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 Frac. with > 0.80 correct sec. struct: 0.206118  [less likely to rearrange as fewer nucleotides to rearrange with!]\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 3.34.18 PM.png \width15441 \height11940
+}¬}
+\f0 \
+Note that signal is not apparent in 'e0', i.e. base pair exposure without ligand -- there high G-C content seems to dictate whether triplet is sequestered or not.\
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 3.33.28 PM.png \width15321 \height11880
+}¬}
+\f0 \
+\
+\
+How about 10-mere flanking?\
+Frac. with > 0.80 correct sec. struct: 0.320037\
+Further concentration of log ratio:\
+\
+\
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 3.46.11 PM.png \width9260 \height11200
+}¬}
+\f0 \
+\
+Looking more closely:\
+\
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 3.49.42 PM.png \width9760 \height6860
+}¬}
+\f0 \
+Note in particular the interesting  maximum in apical loop -- 'anticodon like'.\
+\
+Need to make 'killer' figure -- cooperativity ratio?\
+Hmm, not super-compelling. Following is log base 2 (above was ln):\
+
+\f1 {{\NeXTGraphic Screen Shot 2013-10-30 at 5.28.38 PM.png \width9600 \height6660
+}¬}
+\f0 \
+\
+}

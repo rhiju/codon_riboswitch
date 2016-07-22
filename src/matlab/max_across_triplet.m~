@@ -1,0 +1,5 @@
+function e_max = max_across_triplet( e );
+
+
+M = size( e, 1);
+N = size( e, 2 );
